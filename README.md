@@ -3,9 +3,9 @@
 ### [OBJECT] plant
 ```json
 {
-    "name": String,
-    "description": String,
-    "watering_cycle": int
+    "name": "",
+    "description": "",
+    "watering_cycle": 0
 }
 ```
 
@@ -13,7 +13,7 @@
 ### [OBJECT] garden
 ```json
 {
-    "user_id": int,
-    "plants": []plant
+    "user_id": 0,
+    "plants": [0]
 }
 ```
