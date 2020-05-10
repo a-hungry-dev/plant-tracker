@@ -1,0 +1,24 @@
+version: "2"
+services:
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web/app:/app
+  notify:
+    ports:
+      - "3001:3000"
+    build: ./notify-service
+    volumes:
+      - ./notify-service/app:/app
+  db:
+    ports:
+      - "3306:3306"
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+      - MYSQL_DATABASE=plant-tracker
+    volumes:
+      - ./database:/tmp/database
+    command: mysqld --init-file="/tmp/database/schema.sql"
