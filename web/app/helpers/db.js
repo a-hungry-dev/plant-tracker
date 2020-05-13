@@ -2,7 +2,7 @@ var mysql = require('mysql');
 
 let connection
 
-const initialise = (config) => {
+const initialiseDB = (config) => {
     connection = mysql.createConnection(config);
 }
 
@@ -10,7 +10,6 @@ const query = (string) => {
     return new Promise((res, rej) => {
         connection.query(string, (error, results) => {
             if (error) {
-                console.log(error)
                 res({ error })
             }
             res({ rows: results })
@@ -19,6 +18,6 @@ const query = (string) => {
 }
 
 module.exports = {
-    initialise,
+    initialiseDB,
     query
 }
