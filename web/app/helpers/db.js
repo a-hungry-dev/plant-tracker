@@ -7,12 +7,12 @@ const initialiseDB = (config) => {
 }
 
 const query = (string) => {
-    return new Promise((res, rej) => {
+    return new Promise((resolve, reject) => {
         connection.query(string, (error, results) => {
             if (error) {
-                res({ error })
+                reject({ error })
             }
-            res({ rows: results })
+            resolve(results)
         })
     })
 }
