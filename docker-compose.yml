@@ -15,10 +15,7 @@ services:
   db:
     ports:
       - "3306:3306"
-    image: mysql:5.7
+    build:
+      context: ./database
     environment:
       - MYSQL_ROOT_PASSWORD=changeme
-      - MYSQL_DATABASE=plant-tracker
-    volumes:
-      - ./database:/tmp/database
-    command: mysqld --init-file="/tmp/database/schema.sql"
