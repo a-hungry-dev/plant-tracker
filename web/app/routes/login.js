@@ -14,6 +14,6 @@ module.exports = async ({ body }, res) => {
 
     // eail and password matched
     let token = createSession(result[0]);
-    res.cookie("token", token).end()
+    res.cookie("token", token).json({ status: "success" })
 
 }
