@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
     return res.json(gardens)
 }
 
-
 getGarden = (garden_id) => {
     return new Promise(async (resolve, reject) => {
         let gardens

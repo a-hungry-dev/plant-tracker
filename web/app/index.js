@@ -7,11 +7,12 @@ const { initialiseDB } = require('./helpers/db');
 const { isAuthed } = require('./helpers/auth');
 
 // routes
-const getPlants = require('./routes/plant/get');
-const getGardens = require('./routes/garden/get');
+const getPlants = require('./routes/plants/get');
+const getGardens = require('./routes/gardens/get');
 const register = require('./routes/register');
 const login = require('./routes/login');
-const createGarden = require('./routes/garden/post');
+const createGarden = require('./routes/gardens/post');
+const updateGarden = require('./routes/gardens/put');
 
 // global variables
 const port = 3000;
@@ -44,6 +45,7 @@ app.post('/api/login', login);
 app.post('/api/gardens', isAuthed, createGarden);
 app.get('/api/gardens', isAuthed, getGardens);
 app.get('/api/gardens/:id', isAuthed, getGardens);
+app.put('/api/gardens/:id', isAuthed, updateGarden);
 
 app.listen(port, () => {
     console.log(`web is running on container port ${port}`);
