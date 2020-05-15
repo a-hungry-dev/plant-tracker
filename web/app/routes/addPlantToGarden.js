@@ -1,11 +1,11 @@
 const { query } = require ('../helpers/db');
 
-module.exports = async ({ body }, res) => {
-    let plant
+module.exports = ({ body, params}, res) => {
+    const plants = body.plant_id;
     try {
-        plant = await query(`INSERT INTO garden_plants (garden_id, plant_id) VALUES (${body.garden_id}, ${body.plant_id});`);
+        plants.forEach(async plant => await query(`INSERT INTO garden_plants (garden_id, plant_id) VALUES (${params.id}, ${plant});`));
     } catch (error) {
-        res.json ({ error: "Something went wrong"})
+        res.json({ error: "Something went wrong"});
     }
-    res.send({ plant })
+    res.json ({ plants });
 }
