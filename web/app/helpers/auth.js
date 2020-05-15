@@ -16,14 +16,14 @@ const createSession = (user) => {
 const isAuthed = (req, res, next) => {
     const token = req.cookies.token
     if (!token) {
-        return res.status(401).end()
+        return res.status(401).json({ error: "You are not logged in" })
     }
     var payload
     try {
         payload = jwt.verify(token, jwtKey)
     } catch (e) {
         if (e instanceof jwt.JsonWebTokenError) {
-            return res.status(401).end()
+            return res.status(401).json({ error: "You are not logged in" })
         }
         return res.status(400).end()
     }

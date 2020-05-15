@@ -1,4 +1,4 @@
-const { query } = require('../helpers/db')
+const { query } = require('../../helpers/db')
 
 module.exports = async ({ body, user }, res) => {
 
