@@ -1,6 +1,6 @@
 const { query } = require('../helpers/db')
 
-module.exports = getPlants = async (req, res) => {
+module.exports = async (req, res) => {
     let result
     try {
         result = await query(`SELECT * FROM plants`)
