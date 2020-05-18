@@ -34,7 +34,7 @@ getGarden = (garden_id) => {
             let plants
             try {
                 plants = await query(`
-                    SELECT plants.name, plants.description
+                    SELECT plants.*
                     FROM garden_plants
                     JOIN plants ON garden_plants.plant_id = plants.id
                     WHERE garden_plants.garden_id = ${gardens[garden].id}`)

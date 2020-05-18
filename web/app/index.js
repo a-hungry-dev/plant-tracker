@@ -34,7 +34,18 @@ app.use(cookieParser())
 app.use(express.static('public'));
 
 //define our views
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/views/index.html')));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/views/index.html'))); // all your gardens if logged in else redirect to login 
+// GET: /api/gardens
+// POST: /api/gardens
+
+app.get("/login", (req, res) => res.sendFile(path.join(__dirname, '/views/login.html'))); // login, on login redirect to home (/)
+// POST: /api/register
+// POST: /api/login
+
+app.get("/garden", (req, res) => res.sendFile(path.join(__dirname, '/views/garden.html'))); // a garden
+// GET: /api/plants
+// GET: /api/gardens/:id
+// PUT: /api/gardens
 
 // define our public routes
 app.get('/api/plants', getPlants);
@@ -45,7 +56,7 @@ app.post('/api/login', login);
 app.post('/api/gardens', isAuthed, createGarden);
 app.get('/api/gardens', isAuthed, getGardens);
 app.get('/api/gardens/:id', isAuthed, getGardens);
-app.put('/api/gardens/:id', isAuthed, updateGarden);
+app.put('/api/gardens', isAuthed, updateGarden);
 
 app.listen(port, () => {
     console.log(`web is running on container port ${port}`);
