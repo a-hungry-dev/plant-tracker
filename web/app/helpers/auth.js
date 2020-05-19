@@ -31,7 +31,25 @@ const isAuthed = (req, res, next) => {
     next()
 }
 
+const checkAuth = (req, res, next) => {
+    const token = req.cookies.token
+    if (!token) {
+        return res.redirect("/login")
+    }
+    var payload
+    try {
+        payload = jwt.verify(token, jwtKey)
+    } catch (e) {
+        if (e instanceof jwt.JsonWebTokenError) {
+            return res.redirect("/login")
+        }
+        return res.status(400).end()
+    }
+    next()
+}
+
 module.exports = {
     createSession,
     isAuthed,
+    checkAuth
 }

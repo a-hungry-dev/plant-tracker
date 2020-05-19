@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser")
 
 // helpers
 const { initialiseDB } = require('./helpers/db');
-const { isAuthed } = require('./helpers/auth');
+const { isAuthed, checkAuth } = require('./helpers/auth');
 
 // routes
 const getPlants = require('./routes/plants/get');
@@ -34,19 +34,13 @@ app.use(cookieParser());
 // serve public directory for css, js and assets
 app.use(express.static('public'));
 
-//define our views
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/views/index.html'))); // all your gardens if logged in else redirect to login 
-app.get("/gardens", (req, res) => res.sendFile(path.join(__dirname, '/views/gardens.html')));
-// POST: /api/gardens
+//define our public views
+app.get("/login", (req, res) => res.sendFile(path.join(__dirname, '/views/login.html')));
 
-app.get("/login", (req, res) => res.sendFile(path.join(__dirname, '/views/login.html'))); // login, on login redirect to home (/)
-// POST: /api/register
-// POST: /api/login
-
-app.get("/garden", (req, res) => res.sendFile(path.join(__dirname, '/views/garden.html'))); // a garden
-// GET: /api/plants
-// GET: /api/gardens/:id
-// PUT: /api/gardens
+//define our private views
+app.get("/", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/index.html')));
+app.get("/gardens", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/gardens.html')));
+app.get("/garden", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/garden.html')));
 
 // define our public routes
 app.get('/api/plants', getPlants);
