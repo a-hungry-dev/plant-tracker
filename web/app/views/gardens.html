@@ -4,11 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Tracker</title>
+    <link rel="stylesheet" href="/styles/core.css">
+    <link rel="stylesheet" href="/styles/gardens.css">
+    <title>Plant Tracker | Gardens</title>
 </head>
 
 <body>
-    <h1>Plant Tracker</h1>
+     <div class="wrapper">
+        <h1>Your Current Gardens</h1>
+        <div id="gardens">
+            <div class="garden">
+                <p>House</p>
+                <span>1 plant</span>
+            </div>
+            <div class="garden">
+                <p>Greenhouse</p>
+                <span>2 plants</span>
+            </div>
+        </div>
+        <button id="add-garden">Add New Garden</button>
+    </div>
+
+    <script src="/scripts/gardens.js"></script>
 </body>
 
 </html>

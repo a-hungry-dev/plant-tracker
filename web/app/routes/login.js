@@ -9,11 +9,11 @@ module.exports = async ({ body }, res) => {
     } catch (error) {
         return res.json({ error })
     }
-    if (result.length === 0) return res.json({ error: "User not found" });
-    if (result[0].password != body.password) return res.json({ error: "Password incorrect" });
+    if (result.length === 0) return res.status(401).json({ error: "User not found" });
+    if (result[0].password != body.password) return res.status(401).json({ error: "Password incorrect" });
 
-    // eail and password matched
+    // email and password matched
     let token = createSession(result[0]);
-    res.cookie("token", token).json({ status: "success" })
-
+    res.cookie("token", token);
+    res.redirect('/gardens');
 }

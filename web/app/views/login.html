@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/core.css">
+    <link rel="stylesheet" href="/styles/login.css">
+    <title>Plant Tracker | Login</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Welcome to Plant Tracker</h1>
+        <p>Please log in below to continue:</p>
+        <form id ="login">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" placeholder="Please enter your email address" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Please enter your password" required>
+
+            <p id="error"></p>
+        
+            <input type="submit" value="Login" id="submit-btn">
+        </form>
+    </div>
+
+    <script src="/scripts/login.js"></script>
+</body>
+
+</html>

@@ -35,7 +35,7 @@ app.use(express.static('public'));
 
 //define our views
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/views/index.html'))); // all your gardens if logged in else redirect to login 
-// GET: /api/gardens
+app.get("/gardens", (req, res) => res.sendFile(path.join(__dirname, '/views/gardens.html')));
 // POST: /api/gardens
 
 app.get("/login", (req, res) => res.sendFile(path.join(__dirname, '/views/login.html'))); // login, on login redirect to home (/)
