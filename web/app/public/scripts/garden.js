@@ -1,20 +1,25 @@
 const elPlants = document.querySelector('#plants');
 const elGardenName = document.querySelector('#garden-name')
 
-const url = window.location.pathname
-const arr = url.split('/')
-const id = arr[2];
+// const url = window.location.pathname
+// const arr = url.split('/')
+// const id = arr[2];
 
+// ^ reduce this logic into a one line statement
+const id = window.location.pathname.split("/")[2];
+
+
+// same applies here from gardens
 window.addEventListener('DOMContentLoaded', async () => {
     try { response = await fetch(`/api/gardens/${id}`); }
-    catch(error) { return res.json({ error }); }
+    catch (error) { return res.json({ error }); }
 
     garden = await response.json()
 
     elGardenName.textContent = garden.name;
-    
+
     plants = garden.plants;
-    
+
     plants.forEach(plant => {
         const div = document.createElement('div');
         div.className = 'plant';
