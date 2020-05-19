@@ -3,6 +3,8 @@ const elements = {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-    res = await fetch('/api/gardens');
-    console.log(res);
+
+    const response = await fetch('/api/gardens');
+    const json = await response.json()
+    console.log(json);
 })
