@@ -3,6 +3,7 @@ const { createSession } = require('../helpers/auth')
 
 module.exports = async ({ body }, res) => {
     let result
+    console.log(body);
     try {
         result = await query(`SELECT * FROM users WHERE email = '${body.email}' LIMIT 1`);
 

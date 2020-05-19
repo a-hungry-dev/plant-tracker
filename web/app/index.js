@@ -28,7 +28,8 @@ const app = express();
 
 // express middleware
 app.use(express.json());
-app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // serve public directory for css, js and assets
 app.use(express.static('public'));
