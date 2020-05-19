@@ -4,6 +4,11 @@ h1 {
     color: var(--accent-color);
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .garden {
     display: flex;
     justify-content: space-between;

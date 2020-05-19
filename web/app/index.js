@@ -7,6 +7,7 @@ const { initialiseDB } = require('./helpers/db');
 const { isAuthed, checkAuth } = require('./helpers/auth');
 
 // routes
+const index = require('./routes/index');
 const getPlants = require('./routes/plants/get');
 const getGardens = require('./routes/gardens/get');
 const register = require('./routes/register');
@@ -38,11 +39,11 @@ app.use(express.static('public'));
 app.get("/login", (req, res) => res.sendFile(path.join(__dirname, '/views/login.html')));
 
 //define our private views
-app.get("/", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/index.html')));
 app.get("/gardens", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/gardens.html')));
-app.get("/garden", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/garden.html')));
+app.get("/gardens/:id", checkAuth, (req, res) => res.sendFile(path.join(__dirname, '/views/garden.html')));
 
 // define our public routes
+app.get("/", index);
 app.get('/api/plants', getPlants);
 app.post('/api/register', register);
 app.post('/api/login', login);
