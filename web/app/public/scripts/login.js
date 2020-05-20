@@ -1,11 +1,15 @@
-const form = document.querySelector('#login');
 const email = document.querySelector('#email');
 const password = document.querySelector('#password');
+const submitBtn = document.querySelector('#submit-btn');
 const errorMsg = document.querySelector('#error')
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
+document.addEventListener('keypress', e => { 
+    if (e.key === 'Enter') submitForm(e);
+})
+
+submitBtn.addEventListener('click', e => submitForm(e))
+
+async function submitForm(e) {    
     errorMsg.textContent = '';
     
     const login = { email: email.value, password: password.value };
@@ -22,6 +26,7 @@ form.addEventListener('submit', async (e) => {
     if(!response.ok) {
         const json = await response.json();
         errorMsg.textContent = json.error;
+        return;
     }
-    
-})
+    window.location.pathname = "/";
+}

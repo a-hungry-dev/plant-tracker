@@ -9,7 +9,7 @@ p {
     margin-bottom: 50px;
 }
 
-form#login {
+#login {
     display: flex;
     flex-direction: column;
 }
