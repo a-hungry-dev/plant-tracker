@@ -3,30 +3,30 @@ const password = document.querySelector('#password');
 const submitBtn = document.querySelector('#submit-btn');
 const errorMsg = document.querySelector('#error')
 
-document.addEventListener('keypress', e => { 
-    if (e.key === 'Enter') submitForm(e);
-})
-
-submitBtn.addEventListener('click', e => submitForm(e))
-
-async function submitForm(e) {    
+const submitForm = async (e) => {
     errorMsg.textContent = '';
-    
-    const login = { email: email.value, password: password.value };
+    const body = { email: email.value, password: password.value };
     let response;
     try {
         response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(login)
-            })
-    } catch(err) {
+            body: JSON.stringify(body)
+        })
+    } catch (err) {
         console.error(err);
     }
-    if(!response.ok) {
+    if (!response.ok) {
         const json = await response.json();
         errorMsg.textContent = json.error;
         return;
     }
     window.location.pathname = "/";
 }
+
+// submitBtn.addEventListener('click', e => submitForm(e))
+submitBtn.addEventListener('click', submitForm)
+
+document.addEventListener('keypress', e => {
+    if (e.key === 'Enter') submitForm(e);
+})
