@@ -1,31 +1,45 @@
 const elements = {
-    plants = document.querySelector('#plants'),
-    gardenName = document.querySelector('#garden-name')
+    plants: document.querySelector('#plants'),
+    gardenName: document.querySelector('#garden-name'),
+    loading: document.querySelector('#loading')
 }
 
 const id = window.location.pathname.split("/")[2];
 
+const loading = (bool) => {
+    if (bool) {
+        return elements.loading.style.display = "auto";
+    }
+    return elements.loading.style.display = "none";
+}
 
-// same applies here from gardens
-window.addEventListener('DOMContentLoaded', async () => {
+const fetchPlants = async () => {
+    loading(true);
+
     try { response = await fetch(`/api/gardens/${id}`); }
-    catch (error) { return res.json({ error }); }
+    catch(error) { alert(error); }
 
-    garden = await response.json()
+    const garden = await response.json();
 
     elements.gardenName.textContent = garden.name;
 
-    plants = garden.plants;
+    const plants = garden.plants
 
-    plants.forEach(plant => {
-        const div = document.createElement('div');
-        div.className = 'plant';
-        div.innerHTML = `
-        <h2> ${plant.name} </h2>
-        <button class="delete">X</button>
-        <p> ${plant.description} </p>
-        `;
+    plants.forEach(plant => appendPlantToGarden(plant));
 
-        elements.plants.appendChild(div);
-    })
-})
+    loading(false);
+}
+
+const appendPlantToGarden = (plant) => {
+    const div = document.createElement('div');
+    div.className = 'plant';
+    div.innerHTML = `
+    <h2> ${plant.name} </h2>
+    <button class="delete">X</button>
+    <p> ${plant.description} </p>
+    `;
+
+    elements.plants.appendChild(div);
+}
+
+fetchPlants();
