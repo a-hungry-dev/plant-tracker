@@ -1,11 +1,8 @@
-const elPlants = document.querySelector('#plants');
-const elGardenName = document.querySelector('#garden-name')
+const elements = {
+    plants = document.querySelector('#plants'),
+    gardenName = document.querySelector('#garden-name')
+}
 
-// const url = window.location.pathname
-// const arr = url.split('/')
-// const id = arr[2];
-
-// ^ reduce this logic into a one line statement
 const id = window.location.pathname.split("/")[2];
 
 
@@ -16,7 +13,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     garden = await response.json()
 
-    elGardenName.textContent = garden.name;
+    elements.gardenName.textContent = garden.name;
 
     plants = garden.plants;
 
@@ -29,6 +26,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         <p> ${plant.description} </p>
         `;
 
-        elPlants.appendChild(div);
+        elements.plants.appendChild(div);
     })
 })
