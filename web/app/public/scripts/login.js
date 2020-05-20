@@ -3,7 +3,7 @@ const password = document.querySelector('#password');
 const submitBtn = document.querySelector('#submit-btn');
 const errorMsg = document.querySelector('#error')
 
-const submitForm = async (e) => {
+const submitForm = async () => {
     errorMsg.textContent = '';
     const body = { email: email.value, password: password.value };
     let response;
@@ -21,12 +21,31 @@ const submitForm = async (e) => {
         errorMsg.textContent = json.error;
         return;
     }
-    window.location.pathname = "/";
+    window.location.pathname = '/';
 }
 
-// submitBtn.addEventListener('click', e => submitForm(e))
-submitBtn.addEventListener('click', submitForm)
+const validateForm = () => {
+    errorMsg.textContent = '';
+    if(email.value === '') {
+        errorMsg.textContent = 'Email is required';
+        email.focus();
+        return;
+    }
+    if(password.value === '') {
+        errorMsg.textContent = 'Password is required';
+        password.focus();
+        return;
+    }
+    submitForm();
+}
 
-document.addEventListener('keypress', e => {
-    if (e.key === 'Enter') submitForm(e);
+submitBtn.addEventListener('click', validateForm);
+
+email.addEventListener('keypress', e => {
+    if (e.key === 'Enter') validateForm();
 })
+password.addEventListener('keypress', e => {
+    if (e.key === 'Enter') validateForm();
+})
+
+email.focus();

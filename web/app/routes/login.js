@@ -9,7 +9,7 @@ module.exports = async ({ body }, res) => {
         return res.json({ error });
     };
 
-    if (result.length === 0) return res.status(401).json({ error: "User not found" });
+    if (result.length === 0) return res.status(401).json({ error: "Email not found" });
     if (result[0].password != body.password) return res.status(401).json({ error: "Password incorrect" });
 
     // email and password matched
